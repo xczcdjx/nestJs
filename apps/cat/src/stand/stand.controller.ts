@@ -18,7 +18,7 @@ export class StandController {
     return this.standService.findAll();
   }
 
-  // @Get(':id')
+  @Get(':id')
   findOne(@Param("id") id: string) {
     return this.standService.findOne(+id);
   }
