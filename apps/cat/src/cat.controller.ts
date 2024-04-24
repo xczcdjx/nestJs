@@ -10,7 +10,7 @@ export class CatController {
     console.log(q);
     return this.catService.getHello();
   }
-  @Post(":id")
+  // @Post(":id")
   setHello(@Body() body:object, @Req() req: any) {
     console.log(body,req.query,req.params);
     return "set"

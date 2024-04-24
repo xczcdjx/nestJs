@@ -16,8 +16,8 @@ export class StandService {
     return `This action returns a #${id} stand`;
   }
 
-  update(id: number, updateStandDto: UpdateStandDto) {
-    return `This action updates a #${id} stand`;
+  update(updateStandDto: UpdateStandDto) {
+    return `This action updates a #${updateStandDto.id} stand`;
   }
 
   remove(id: number) {

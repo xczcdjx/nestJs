@@ -2,7 +2,7 @@ import { Controller, All, Req, Res } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { HttpService } from '@nestjs/axios';
 import { Observable } from 'rxjs';
-import { AxiosResponse } from 'axios';
+import { AxiosError, AxiosResponse } from "axios";
 
 @Controller()
 export class AppController {
@@ -15,8 +15,13 @@ export class AppController {
       const response = await this.sendRequest('http://localhost:3001' + url, req);
       return res.status(response.status).send(response.data);
     } catch (error) {
-      console.error('Error occurred:', error);
-      return res.status(500).send('Internal Server Error');
+      const axiosError = error as AxiosError;
+      if (axiosError.response) {
+        return res.status(axiosError.response.status).send(axiosError.response.data);
+      } else {
+        console.error('Error occurred:', error);
+        return res.status(500).send('Internal Server Error');
+      }
     }
   }
 
