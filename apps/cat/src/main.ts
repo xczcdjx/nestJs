@@ -2,6 +2,7 @@ import { NestFactory } from "@nestjs/core";
 import { CatModule } from "./cat.module";
 import { ValidationPipe } from "@nestjs/common";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { SwaggerTheme, SwaggerThemeNameEnum } from "swagger-themes";
 
 async function bootstrap() {
   const app = await NestFactory.create(CatModule);
@@ -12,7 +13,17 @@ async function bootstrap() {
     new DocumentBuilder().addBearerAuth()
       .setTitle(`cat document`).setDescription(`cat document`)
       .setVersion("1").build());
-  SwaggerModule.setup("doc", app, document);
+  const theme = new SwaggerTheme();
+  const options = {
+    explorer: true,
+    customCss: theme.getBuffer(SwaggerThemeNameEnum.CLASSIC)
+  };
+  const options2 = {
+    explorer: true,
+    customCss: theme.getBuffer(SwaggerThemeNameEnum.DARK)
+  };
+  SwaggerModule.setup("doc-l", app, document,options);
+  SwaggerModule.setup("doc-d", app, document,options2);
   await app.listen(3001);
 }
 
