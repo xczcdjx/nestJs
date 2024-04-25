@@ -16,7 +16,7 @@ async function bootstrap() {
   const theme = new SwaggerTheme();
   const options = {
     explorer: true,
-    customCss: theme.getBuffer(SwaggerThemeNameEnum.CLASSIC)
+    customCss: theme.getBuffer(SwaggerThemeNameEnum.FEELING_BLUE)
   };
   const options2 = {
     explorer: true,
