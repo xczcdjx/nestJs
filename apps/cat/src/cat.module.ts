@@ -4,6 +4,7 @@ import { CatService } from "./cat.service";
 import { StandModule } from "./stand/stand.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Stand } from "./stand/entities/stand.entity";
+import { AuthModule } from './auth/auth.module';
 @Global()
 @Module({
   imports: [StandModule, TypeOrmModule.forRoot({
@@ -18,7 +19,7 @@ import { Stand } from "./stand/entities/stand.entity";
     retryDelay:500,
     retryAttempts:10,
     logging:true
-  }), TypeOrmModule.forFeature([Stand])],
+  }), TypeOrmModule.forFeature([Stand]), AuthModule],
   controllers: [CatController],
   providers: [CatService],
   exports: [TypeOrmModule.forFeature([Stand])]
