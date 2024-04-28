@@ -8,6 +8,9 @@ import { AuthModule } from './auth/auth.module';
 import { TableModule } from './table/table.module';
 import { Profile } from "./table/entities/Profile.entity";
 import { User } from "./table/entities/User.entity";
+import { SchoolModule } from './school/school.module';
+import { TeaStuEntity } from "./school/views/tea_stu.entity";
+import { Role } from "./table/entities/Role.entity";
 @Global()
 @Module({
   imports: [StandModule, TypeOrmModule.forRoot({
@@ -17,15 +20,15 @@ import { User } from "./table/entities/User.entity";
     username: "root",
     password: "987654",
     database: "todo",
-    synchronize: true,
+    // synchronize: true,
     autoLoadEntities:true,
     retryDelay:500,
     retryAttempts:10,
     logging:true
-  }), TypeOrmModule.forFeature([Stand,User,Profile]), AuthModule, TableModule],
+  }), TypeOrmModule.forFeature([Stand,User,Profile,Role,TeaStuEntity]), AuthModule, TableModule, SchoolModule],
   controllers: [CatController],
   providers: [CatService],
-  exports: [TypeOrmModule.forFeature([Stand,User,Profile])]
+  exports: [TypeOrmModule.forFeature([Stand,User,Profile,Role,TeaStuEntity])]
 })
 export class CatModule {
 }
