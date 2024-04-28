@@ -21,4 +21,8 @@ export class TableController {
   findUser(@Query('id') id: number) {
     return this.tableService.findUser(id)
   }
+  @Get('target')
+  findTarget(@Query('id') id: number) {
+    return this.tableService.findTarget(id)
+  }
 }

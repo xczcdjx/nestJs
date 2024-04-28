@@ -4,13 +4,15 @@ import { CatService } from "./cat.service";
 import { StandModule } from "./stand/stand.module";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Stand } from "./stand/entities/stand.entity";
-import { AuthModule } from './auth/auth.module';
-import { TableModule } from './table/table.module';
+import { AuthModule } from "./auth/auth.module";
+import { TableModule } from "./table/table.module";
 import { Profile } from "./table/entities/Profile.entity";
 import { User } from "./table/entities/User.entity";
-import { SchoolModule } from './school/school.module';
+import { SchoolModule } from "./school/school.module";
 import { TeaStuEntity } from "./school/views/tea_stu.entity";
 import { Role } from "./table/entities/Role.entity";
+import { Target } from "./table/entities/Target.entity";
+
 @Global()
 @Module({
   imports: [StandModule, TypeOrmModule.forRoot({
@@ -21,14 +23,14 @@ import { Role } from "./table/entities/Role.entity";
     password: "987654",
     database: "todo",
     // synchronize: true,
-    autoLoadEntities:true,
-    retryDelay:500,
-    retryAttempts:10,
-    logging:true
-  }), TypeOrmModule.forFeature([Stand,User,Profile,Role,TeaStuEntity]), AuthModule, TableModule, SchoolModule],
+    autoLoadEntities: true,
+    retryDelay: 500,
+    retryAttempts: 10,
+    logging: true
+  }), TypeOrmModule.forFeature([Stand, User, Profile, Role, Target]), AuthModule, TableModule, SchoolModule],
   controllers: [CatController],
   providers: [CatService],
-  exports: [TypeOrmModule.forFeature([Stand,User,Profile,Role,TeaStuEntity])]
+  exports: [TypeOrmModule.forFeature([Stand, User, Profile, Target, Role])]
 })
 export class CatModule {
 }

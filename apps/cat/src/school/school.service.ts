@@ -7,7 +7,9 @@ import { Repository } from "typeorm";
 
 @Injectable()
 export class SchoolService {
-  constructor(@InjectRepository(TeaStuEntity) private readonly teaStuRepository: Repository<TeaStuEntity>) {
+  constructor(
+    // @InjectRepository(TeaStuEntity) private readonly teaStuRepository: Repository<TeaStuEntity>
+  ) {
   }
 
   create(createSchoolDto: CreateSchoolDto) {
@@ -15,7 +17,8 @@ export class SchoolService {
   }
 
   findAll() {
-    return this.teaStuRepository.find();
+    // return this.teaStuRepository.find();
+    return ""
   }
 
   findOne(id: number) {

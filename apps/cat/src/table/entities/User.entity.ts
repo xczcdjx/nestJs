@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Profile } from "./Profile.entity";
 import { Role } from "./Role.entity";
+import { Target } from "./Target.entity";
 
 @Entity("user")
 export class User {
@@ -14,4 +15,6 @@ export class User {
   profile: Profile;
   @ManyToOne(() => Role, (r) => r.users)
   role: Role;
+  @ManyToMany(()=>Target, (t)=>t.users)
+  targets: Target[];
 }

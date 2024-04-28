@@ -5,13 +5,16 @@ import { Repository } from "typeorm";
 import { Profile } from "./entities/Profile.entity";
 import { UserDto } from "./dto/User";
 import { Role } from "./entities/Role.entity";
+import { Target } from "./entities/Target.entity";
 
 @Injectable()
 export class TableService {
   constructor(
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     @InjectRepository(Role) private readonly roleRepository: Repository<Role>,
-    @InjectRepository(Profile) private readonly profileRepository: Repository<Profile>) {
+    @InjectRepository(Profile) private readonly profileRepository: Repository<Profile>,
+    @InjectRepository(Target) private readonly targetRepository: Repository<Target>
+  ) {
   }
 
   create({ name, account, password, email }: UserDto) {
@@ -38,5 +41,13 @@ export class TableService {
 
   findRole(id: number) {
     return this.roleRepository.find({ where: { id }, relations: ["users"] });
+  }
+
+  findTarget(id: number) {
+    // return this.targetRepository.findOne({ where: { id }, relations: ["users"] });
+    return this.targetRepository.createQueryBuilder('target')
+      // .where("target.id= :id",{id})
+      .leftJoinAndSelect("target.users", "users")
+      .getMany()
   }
 }
