@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from "@nestjs/common";
+import { Body, Controller, Get, Param, Post, Query } from "@nestjs/common";
 import { TableService } from './table.service';
 import { UserDto } from "./dto/User";
 
@@ -12,5 +12,13 @@ export class TableController {
   @Get()
   findAll(){
     return this.tableService.findAll()
+  }
+  @Get('role')
+  findRole(@Query('id') id: number) {
+    return this.tableService.findRole(id)
+  }
+  @Get('user')
+  findUser(@Query('id') id: number) {
+    return this.tableService.findUser(id)
   }
 }

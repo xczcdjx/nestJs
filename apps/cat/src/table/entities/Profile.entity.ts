@@ -11,7 +11,9 @@ export class Profile {
   password: string;
   @Column()
   email: string;
+  // 一对一
   @OneToOne(()=>User,user=>user.profile)
+  // 对应外键所在的表
   @JoinColumn()
   user:User
 }
